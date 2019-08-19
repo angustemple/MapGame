@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MapGame</string>
+    <string name="west">West</string>
+    <string name="east">East</string>
+</resources>
