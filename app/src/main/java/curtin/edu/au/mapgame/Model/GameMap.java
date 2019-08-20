@@ -12,7 +12,7 @@ public class GameMap
     }
 
     // ACCESSORS -----------------------------------------------------------------------------------
-    public void getArea(int row, int col)
+    public Area getArea(int row, int col)
     {
         return grid[row][col];
     }
