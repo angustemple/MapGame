@@ -2,4 +2,12 @@
     <string name="app_name">MapGame</string>
     <string name="west">West</string>
     <string name="east">East</string>
+    <string name="north">North</string>
+    <string name="south">South</string>
+    <string name="label_health">Health: 100.00</string>
+    <string name="label_cash">Cash: 0</string>
+    <string name="label_mass">Mass: 0.00</string>
+    <string name="label_restart">Restart</string>
+    <string name="label_winlose">You have neither won nor lost!</string>
+
 </resources>

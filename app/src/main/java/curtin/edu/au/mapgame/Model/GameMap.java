@@ -1,4 +1,5 @@
 package curtin.edu.au.mapgame.Model;
+import curtin.edu.au.mapgame.Model.Area;
 import java.util.*;
 
 public class GameMap
@@ -8,7 +9,7 @@ public class GameMap
     // CONSTRUCTOR ---------------------------------------------------------------------------------
     public GameMap()
     {
-        grid = Area[10][10];
+        this.grid = new Area[10][10];
     }
 
     // ACCESSORS -----------------------------------------------------------------------------------
