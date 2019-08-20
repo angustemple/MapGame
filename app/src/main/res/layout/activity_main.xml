@@ -11,7 +11,7 @@
     android:layout_marginEnd="0dp"
     android:layout_marginRight="0dp"
     android:layout_marginBottom="0dp"
-    tools:context=".MainActivity">
+    tools:context=".NavigationActivity">
 
     <Button
         android:id="@+id/btn_north"
@@ -26,7 +26,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/btnSouth"
+        android:id="@+id/btn_south"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"
@@ -119,8 +119,6 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="15dp"
         android:text="@string/label_restart"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textScaleX="1"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -9,5 +9,10 @@
     <string name="label_mass">Mass: 0.00</string>
     <string name="label_restart">Restart</string>
     <string name="label_winlose">You have neither won nor lost!</string>
+    <string name="move_north">Moved 1 unit north...</string>
+    <string name="move_south">Moved 1 unit south...</string>
+    <string name="move_east">Moved 1 unit east...</string>
+    <string name="move_west">Moved 1 unit west...</string>
+
 
 </resources>
