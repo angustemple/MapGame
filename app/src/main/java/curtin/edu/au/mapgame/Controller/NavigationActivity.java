@@ -98,7 +98,7 @@ public class NavigationActivity extends AppCompatActivity
                 if(player.getRowLocation() > 0)
                 {
                     Toast toast = Toast.makeText(NavigationActivity.this, R.string.move_north, Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 775);
+                    toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 125);
                     toast.show();
                     player.moveNorth();
                     health.setText(String.valueOf("Health: " + player.getHealth()));
@@ -108,7 +108,7 @@ public class NavigationActivity extends AppCompatActivity
                 {
 
                     Toast toast = Toast.makeText(NavigationActivity.this, R.string.cannot_move, Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 775);
+                    toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 125);
                     toast.show();
                 }
             }
@@ -122,7 +122,7 @@ public class NavigationActivity extends AppCompatActivity
                 if(player.getRowLocation() < MAX_LOC)
                 {
                     Toast toast = Toast.makeText(NavigationActivity.this, R.string.move_south, Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 775);
+                    toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 125);
                     toast.show();
                     player.moveSouth();
                     health.setText(String.valueOf("Health: " + player.getHealth()));
@@ -131,7 +131,7 @@ public class NavigationActivity extends AppCompatActivity
                 else
                 {
                     Toast toast = Toast.makeText(NavigationActivity.this, R.string.cannot_move, Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 775);
+                    toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 125);
                     toast.show();
                 }
             }
@@ -145,7 +145,7 @@ public class NavigationActivity extends AppCompatActivity
                 if(player.getColLocation() < MAX_LOC)
                 {
                     Toast toast = Toast.makeText(NavigationActivity.this, R.string.move_east, Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 775);
+                    toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 125);
                     toast.show();
                     player.moveEast();
                     health.setText(String.valueOf("Health: " + player.getHealth()));
@@ -154,7 +154,7 @@ public class NavigationActivity extends AppCompatActivity
                 else
                 {
                     Toast toast = Toast.makeText(NavigationActivity.this, R.string.cannot_move, Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 775);
+                    toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 125);
                     toast.show();
                 }
             }
@@ -169,7 +169,7 @@ public class NavigationActivity extends AppCompatActivity
                 if(player.getColLocation() > 0)
                 {
                     Toast toast = Toast.makeText(NavigationActivity.this, R.string.move_west, Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 775);
+                    toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 125);
                     toast.show();
                     player.moveWest();
                     health.setText(String.valueOf("Health: " + player.getHealth()));
@@ -178,7 +178,7 @@ public class NavigationActivity extends AppCompatActivity
                 else
                 {
                     Toast toast = Toast.makeText(NavigationActivity.this, R.string.cannot_move, Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 775);
+                    toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 125);
                     toast.show();
                 }
             }
