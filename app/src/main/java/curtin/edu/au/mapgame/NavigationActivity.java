@@ -1,6 +1,7 @@
 package curtin.edu.au.mapgame;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ public class NavigationActivity extends AppCompatActivity
     private TextView health;
     private TextView cash;
     private TextView mass;
+    private TextView location;
     private Button restart;
 
 
@@ -40,10 +42,11 @@ public class NavigationActivity extends AppCompatActivity
             map = new GameMap();
         }
 
-        // Connect health / cash / mass bars -------------------------------------------------------
+        // Connect health / cash / mass / location bars --------------------------------------------
         health = findViewById(R.id.tv_health);
         cash = findViewById(R.id.tv_cash);
         mass = findViewById(R.id.tv_mass);
+        location = findViewById(R.id.tv_location);
 
         // Connect Navigation Buttons --------------------------------------------------------------
         north = findViewById(R.id.btn_north);
@@ -62,9 +65,10 @@ public class NavigationActivity extends AppCompatActivity
             {
                 player = new Player();
                 map = new GameMap();
-                health.setText(String.valueOf("Health: " + player.getHealth()));
-                cash.setText(String.valueOf("Cash: " + player.getCash()));
-                mass.setText(String.valueOf("Mass: " + player.getEquipmentMass()));
+                health.setText(R.string.label_health);
+                cash.setText(R.string.label_cash);
+                mass.setText(R.string.label_mass);
+                location.setText(R.string.default_location);
             }
         });
 
@@ -76,13 +80,19 @@ public class NavigationActivity extends AppCompatActivity
             {
                 if(player.getRowLocation() > 0)
                 {
-                    Toast.makeText(NavigationActivity.this, R.string.move_north, Toast.LENGTH_SHORT).show();
+                    Toast toast = Toast.makeText(NavigationActivity.this, R.string.move_north, Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 775);
+                    toast.show();
                     player.moveNorth();
                     health.setText(String.valueOf("Health: " + player.getHealth()));
+                    location.setText(String.valueOf("Current Location: " + "[" + player.getRowLocation() + "][" + player.getColLocation() + "]"));
                 }
                 else
                 {
-                    Toast.makeText(NavigationActivity.this, R.string.cannot_move, Toast.LENGTH_SHORT).show();
+
+                    Toast toast = Toast.makeText(NavigationActivity.this, R.string.cannot_move, Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 775);
+                    toast.show();
                 }
             }
         });
@@ -94,13 +104,18 @@ public class NavigationActivity extends AppCompatActivity
             {
                 if(player.getRowLocation() < MAX_LOC)
                 {
-                    Toast.makeText(NavigationActivity.this, R.string.move_south, Toast.LENGTH_SHORT).show();
+                    Toast toast = Toast.makeText(NavigationActivity.this, R.string.move_south, Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 775);
+                    toast.show();
                     player.moveSouth();
                     health.setText(String.valueOf("Health: " + player.getHealth()));
+                    location.setText(String.valueOf("Current Location: " + "[" + player.getRowLocation() + "][" + player.getColLocation() + "]"));
                 }
                 else
                 {
-                    Toast.makeText(NavigationActivity.this, R.string.cannot_move, Toast.LENGTH_SHORT).show();
+                    Toast toast = Toast.makeText(NavigationActivity.this, R.string.cannot_move, Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 775);
+                    toast.show();
                 }
             }
         });
@@ -112,13 +127,18 @@ public class NavigationActivity extends AppCompatActivity
             {
                 if(player.getColLocation() < MAX_LOC)
                 {
-                    Toast.makeText(NavigationActivity.this, R.string.move_east, Toast.LENGTH_SHORT).show();
+                    Toast toast = Toast.makeText(NavigationActivity.this, R.string.move_east, Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 775);
+                    toast.show();
                     player.moveEast();
                     health.setText(String.valueOf("Health: " + player.getHealth()));
+                    location.setText(String.valueOf("Current Location: " + "[" + player.getRowLocation() + "][" + player.getColLocation() + "]"));
                 }
                 else
                 {
-                    Toast.makeText(NavigationActivity.this, R.string.cannot_move, Toast.LENGTH_SHORT).show();
+                    Toast toast = Toast.makeText(NavigationActivity.this, R.string.cannot_move, Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 775);
+                    toast.show();
                 }
             }
         });
@@ -131,13 +151,18 @@ public class NavigationActivity extends AppCompatActivity
 
                 if(player.getColLocation() > 0)
                 {
-                    Toast.makeText(NavigationActivity.this, R.string.move_west, Toast.LENGTH_SHORT).show();
+                    Toast toast = Toast.makeText(NavigationActivity.this, R.string.move_west, Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 775);
+                    toast.show();
                     player.moveWest();
                     health.setText(String.valueOf("Health: " + player.getHealth()));
+                    location.setText(String.valueOf("Current Location: " + "[" + player.getRowLocation() + "][" + player.getColLocation() + "]"));
                 }
                 else
                 {
-                    Toast.makeText(NavigationActivity.this, R.string.cannot_move, Toast.LENGTH_SHORT).show();
+                    Toast toast = Toast.makeText(NavigationActivity.this, R.string.cannot_move, Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER|Gravity.CENTER, 0, 775);
+                    toast.show();
                 }
             }
         });

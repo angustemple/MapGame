@@ -8,6 +8,7 @@
     <string name="label_cash">Cash: 0</string>
     <string name="label_mass">Mass: 0.00</string>
     <string name="label_restart">Restart</string>
+    <string name="default_location">Current Location: [0][0]</string>
     <string name="label_winlose">You have neither won nor lost!</string>
     <string name="move_north">Moved 1 unit north...</string>
     <string name="move_south">Moved 1 unit south...</string>

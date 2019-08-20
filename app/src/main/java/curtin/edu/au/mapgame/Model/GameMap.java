@@ -36,7 +36,7 @@ public class GameMap
     {
         // Set Towns in three locations
         // No Items in this town
-        grid[0][0].setTown(true);
+        grid[0][1].setTown(true);
         // Road Map found in this town
         grid[1][3].setTown(true);
         // Ice-Scraper found in this town
@@ -66,11 +66,11 @@ public class GameMap
         Food lasagne = new Food("Cold lasagne", 6, 30.00);
 
         // Put food items in town
-        grid[0][0].addItem(apple);
-        grid[0][0].addItem(apple2);
-        grid[0][0].addItem(apple3);
-        grid[0][0].addItem(steak);
-        grid[0][0].addItem(lasagne);
+        grid[0][1].addItem(apple);
+        grid[0][1].addItem(apple2);
+        grid[0][1].addItem(apple3);
+        grid[0][1].addItem(steak);
+        grid[0][1].addItem(lasagne);
     }
 
 
