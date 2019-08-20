@@ -4,11 +4,18 @@ import java.util.*;
 
 public class Food extends Item
 {
-    // CLASSFIELDS --------------------------------------------------------------------------------------
+    // CLASSFIELDS ---------------------------------------------------------------------------------
     private String description;
     private int value;
     private double health;
 
+    // CONSTRUCTOR ---------------------------------------------------------------------------------
+    public Food(String description, int value, double health)
+    {
+        this.description = description;
+        this.value = value;
+        this.health = health;
+    }
     // ACCESSORS -----------------------------------------------------------------------------------
     public double getHealth()
     {
