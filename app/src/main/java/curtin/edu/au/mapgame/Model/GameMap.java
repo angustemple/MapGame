@@ -8,6 +8,7 @@ public class GameMap
     public GameMap()
     {
         this.grid = new Area[4][4];
+        initialiseArray();
         createAreaItems();
     }
 
@@ -20,6 +21,17 @@ public class GameMap
     // MUTATORS ------------------------------------------------------------------------------------
 
     // SPECIFIC METHODS ----------------------------------------------------------------------------
+    private void initialiseArray()
+    {
+        for(int ii = 0; ii < 4; ii++)
+        {
+            for(int jj = 0; jj < 4; jj++)
+            {
+                grid[ii][jj] = new Area();
+            }
+        }
+    }
+
     private void createAreaItems()
     {
         // Set Towns in three locations

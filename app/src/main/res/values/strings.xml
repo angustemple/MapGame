@@ -13,6 +13,8 @@
     <string name="move_south">Moved 1 unit south...</string>
     <string name="move_east">Moved 1 unit east...</string>
     <string name="move_west">Moved 1 unit west...</string>
+    <string name="cannot_move">Cannot move any further in this direction</string>
+
 
 
 </resources>

@@ -100,4 +100,28 @@ public class Player
     {
         this.equipmentList.add(newEquipment);
     }
+
+    public void moveNorth()
+    {
+        this.rowLocation--;
+        this.health = Math.max(0.0, this.health - 5.0 - (equipmentMass / 2.0));
+    }
+
+    public void moveSouth()
+    {
+        this.rowLocation++;
+        this.health = Math.max(0.0, this.health - 5.0 - (equipmentMass / 2.0));
+    }
+
+    public void moveEast()
+    {
+        this.colLocation++;
+        this.health = Math.max(0.0, this.health - 5.0 - (equipmentMass / 2.0));
+    }
+
+    public void moveWest()
+    {
+        this.colLocation--;
+        this.health = Math.max(0.0, this.health - 5.0 - (equipmentMass / 2.0));
+    }
 }
