@@ -1,4 +1,5 @@
 <resources>
+    <!--Strings for NavigationActivity-->
     <string name="app_name">MapGame</string>
     <string name="west">West</string>
     <string name="east">East</string>
@@ -8,14 +9,17 @@
     <string name="label_cash">Cash: 0</string>
     <string name="label_mass">Mass: 0.00</string>
     <string name="label_restart">Restart</string>
-    <string name="default_location">Current Location: [0][0]</string>
     <string name="label_winlose">You have neither won nor lost!</string>
+    <string name="label_options">Options</string>
+    <string name="default_location">Current Location: [0][0]</string>
+    <string name="default_description">Wilderness</string>
     <string name="move_north">Moved 1 unit north...</string>
     <string name="move_south">Moved 1 unit south...</string>
     <string name="move_east">Moved 1 unit east...</string>
     <string name="move_west">Moved 1 unit west...</string>
     <string name="cannot_move">Cannot move any further in this direction</string>
 
+    <!--Strings for WildernessOptionsActivity-->
 
 
 </resources>

@@ -1,5 +1,6 @@
-package curtin.edu.au.mapgame;
+package curtin.edu.au.mapgame.Controller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import curtin.edu.au.mapgame.Model.GameMap;
 import curtin.edu.au.mapgame.Model.Player;
+import curtin.edu.au.mapgame.R;
 
 public class NavigationActivity extends AppCompatActivity
 {
@@ -26,6 +28,7 @@ public class NavigationActivity extends AppCompatActivity
     private TextView mass;
     private TextView location;
     private Button restart;
+    private Button options;
 
 
     @Override
@@ -54,6 +57,9 @@ public class NavigationActivity extends AppCompatActivity
         east = findViewById(R.id.btn_east);
         west = findViewById(R.id.btn_west);
 
+        // Connect Options Button ------------------------------------------------------------------
+        options = findViewById(R.id.btn_options);
+
         // Connect Restart Button ------------------------------------------------------------------
         restart = findViewById(R.id.btn_restart);
 
@@ -69,6 +75,17 @@ public class NavigationActivity extends AppCompatActivity
                 cash.setText(R.string.label_cash);
                 mass.setText(R.string.label_mass);
                 location.setText(R.string.default_location);
+            }
+        });
+
+        // Add Options Button Listener -------------------------------------------------------------
+        options.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent i = new Intent(NavigationActivity.this, WildernessOptionActivity.class);
+                startActivity(i);
             }
         });
 
