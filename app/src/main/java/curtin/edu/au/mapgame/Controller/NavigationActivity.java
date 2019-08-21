@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import curtin.edu.au.mapgame.Model.Area;
 import curtin.edu.au.mapgame.Model.GameMap;
 import curtin.edu.au.mapgame.Model.Player;
 import curtin.edu.au.mapgame.R;
@@ -29,13 +30,15 @@ public class NavigationActivity extends AppCompatActivity
     private TextView location;
     private Button restart;
     private Button options;
+    private Area currArea;
+    private TextView areaDescription;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_navigation);
         if(player == null)
         {
             player = new Player();
@@ -43,6 +46,7 @@ public class NavigationActivity extends AppCompatActivity
         if(map == null)
         {
             map = new GameMap();
+            currArea = map.getArea(0,0);
         }
 
         // Connect health / cash / mass / location bars --------------------------------------------
@@ -50,6 +54,7 @@ public class NavigationActivity extends AppCompatActivity
         cash = findViewById(R.id.tv_cash);
         mass = findViewById(R.id.tv_mass);
         location = findViewById(R.id.tv_location);
+        areaDescription = findViewById(R.id.tv_area_description);
 
         // Connect Navigation Buttons --------------------------------------------------------------
         north = findViewById(R.id.btn_north);
@@ -71,10 +76,11 @@ public class NavigationActivity extends AppCompatActivity
             {
                 player = new Player();
                 map = new GameMap();
-                health.setText(R.string.label_health);
-                cash.setText(R.string.label_cash);
-                mass.setText(R.string.label_mass);
+                health.setText(R.string.default_health);
+                cash.setText(R.string.default_cash);
+                mass.setText(R.string.default_mass);
                 location.setText(R.string.default_location);
+                areaDescription.setText(R.string.label_wilderness);
             }
         });
 
@@ -101,12 +107,10 @@ public class NavigationActivity extends AppCompatActivity
                     toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 125);
                     toast.show();
                     player.moveNorth();
-                    health.setText(String.valueOf("Health: " + player.getHealth()));
-                    location.setText(String.valueOf("Current Location: " + "[" + player.getRowLocation() + "][" + player.getColLocation() + "]"));
+                    navCommonOperations();
                 }
                 else
                 {
-
                     Toast toast = Toast.makeText(NavigationActivity.this, R.string.cannot_move, Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 125);
                     toast.show();
@@ -125,8 +129,7 @@ public class NavigationActivity extends AppCompatActivity
                     toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 125);
                     toast.show();
                     player.moveSouth();
-                    health.setText(String.valueOf("Health: " + player.getHealth()));
-                    location.setText(String.valueOf("Current Location: " + "[" + player.getRowLocation() + "][" + player.getColLocation() + "]"));
+                    navCommonOperations();
                 }
                 else
                 {
@@ -148,8 +151,7 @@ public class NavigationActivity extends AppCompatActivity
                     toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 125);
                     toast.show();
                     player.moveEast();
-                    health.setText(String.valueOf("Health: " + player.getHealth()));
-                    location.setText(String.valueOf("Current Location: " + "[" + player.getRowLocation() + "][" + player.getColLocation() + "]"));
+                    navCommonOperations();
                 }
                 else
                 {
@@ -172,8 +174,7 @@ public class NavigationActivity extends AppCompatActivity
                     toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 125);
                     toast.show();
                     player.moveWest();
-                    health.setText(String.valueOf("Health: " + player.getHealth()));
-                    location.setText(String.valueOf("Current Location: " + "[" + player.getRowLocation() + "][" + player.getColLocation() + "]"));
+                    navCommonOperations();
                 }
                 else
                 {
@@ -183,5 +184,20 @@ public class NavigationActivity extends AppCompatActivity
                 }
             }
         });
+    }
+
+    private void navCommonOperations()
+    {
+        currArea = map.getArea(player.getRowLocation(), player.getColLocation());
+        if(currArea.getTown())
+        {
+            areaDescription.setText(R.string.label_town);
+        }
+        else
+        {
+            areaDescription.setText(R.string.label_wilderness);
+        }
+        health.setText(String.valueOf("Health: " + player.getHealth()));
+        location.setText(String.valueOf("Current Location: " + "[" + player.getRowLocation() + "][" + player.getColLocation() + "]"));
     }
 }

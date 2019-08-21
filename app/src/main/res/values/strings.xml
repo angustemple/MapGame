@@ -5,14 +5,15 @@
     <string name="east">East</string>
     <string name="north">North</string>
     <string name="south">South</string>
-    <string name="label_health">Health: 100.00</string>
-    <string name="label_cash">Cash: 0</string>
-    <string name="label_mass">Mass: 0.00</string>
+    <string name="default_health">Health: 100.00</string>
+    <string name="default_cash">Cash: 0</string>
+    <string name="default_mass">Mass: 0.00</string>
+    <string name="default_location">Current Location: [0][0]</string>
     <string name="label_restart">Restart</string>
     <string name="label_winlose">You have neither won nor lost!</string>
     <string name="label_options">Options</string>
-    <string name="default_location">Current Location: [0][0]</string>
-    <string name="default_description">Wilderness</string>
+    <string name="label_wilderness">Wilderness</string>
+    <string name="label_town">Town</string>
     <string name="move_north">Moved 1 unit north...</string>
     <string name="move_south">Moved 1 unit south...</string>
     <string name="move_east">Moved 1 unit east...</string>
@@ -20,6 +21,8 @@
     <string name="cannot_move">Cannot move any further in this direction</string>
 
     <!--Strings for WildernessOptionsActivity-->
-
-
+    <string name="label_area_items">Items in Area</string>
+    <string name="label_player_items">Your Items</string>
+    <string name="label_prev">Prev</string>
+    <string name="label_next">Next</string>
 </resources>

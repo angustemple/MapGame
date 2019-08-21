@@ -4,4 +4,91 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Controller.WildernessOptionActivity"/>
+    tools:context=".Controller.WildernessOptionActivity">
+
+    <TextView
+        android:id="@+id/tv_area_items"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_area_items"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="67dp" />
+
+    <TextView
+        android:id="@+id/tv_player_items"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_player_items"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="356dp" />
+
+    <Button
+        android:id="@+id/btn_area_item_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="84dp"
+        android:text="@string/label_next"
+        app:layout_constraintStart_toEndOf="@+id/tv_area_items"
+        app:layout_constraintTop_toBottomOf="@+id/tv_area_items" />
+
+    <Button
+        android:id="@+id/btn_area_item_prev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginRight="48dp"
+        android:text="@string/label_prev"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_area_items"
+        app:layout_constraintTop_toBottomOf="@+id/tv_area_items" />
+
+    <Button
+        android:id="@+id/btn_player_item_prev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="@string/label_prev"
+        app:layout_constraintTop_toBottomOf="@+id/tv_player_items"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <Button
+        android:id="@+id/btn_player_item_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginLeft="68dp"
+        android:layout_marginTop="44dp"
+        android:text="@string/label_next"
+        app:layout_constraintStart_toEndOf="@+id/tv_player_items"
+        app:layout_constraintTop_toBottomOf="@+id/tv_player_items" />
+
+    <LinearLayout
+        android:layout_width="149dp"
+        android:layout_height="97dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/tv_player_items"
+        app:layout_constraintEnd_toStartOf="@+id/btn_area_item_next"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toEndOf="@+id/btn_area_item_prev"
+        app:layout_constraintTop_toBottomOf="@+id/tv_area_items"
+        app:layout_constraintVertical_bias="0.398"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="182dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="32dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/btn_player_item_next"
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toEndOf="@+id/btn_player_item_prev"
+        app:layout_constraintTop_toBottomOf="@+id/tv_player_items"></LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

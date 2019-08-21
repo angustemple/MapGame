@@ -75,7 +75,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="20dp"
-        android:text="@string/label_health"
+        android:text="@string/default_health"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tv_cash"
         app:layout_constraintHorizontal_bias="0.296"
@@ -91,7 +91,7 @@
         android:layout_marginEnd="28dp"
         android:layout_marginRight="28dp"
         android:layout_marginBottom="20dp"
-        android:text="@string/label_cash"
+        android:text="@string/default_cash"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tv_mass"
         app:layout_constraintTop_toTopOf="parent"
@@ -105,7 +105,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:layout_marginBottom="20dp"
-        android:text="@string/label_mass"
+        android:text="@string/default_mass"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_restart"
         app:layout_constraintTop_toTopOf="parent"
@@ -165,7 +165,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="@string/default_description" />
+            android:text="@string/label_wilderness" />
 
         <Button
             android:id="@+id/btn_options"

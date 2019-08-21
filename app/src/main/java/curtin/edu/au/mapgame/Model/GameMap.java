@@ -72,7 +72,4 @@ public class GameMap
         grid[0][1].addItem(steak);
         grid[0][1].addItem(lasagne);
     }
-
-
-
 }
