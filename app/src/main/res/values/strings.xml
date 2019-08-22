@@ -25,4 +25,8 @@
     <string name="label_player_items">Your Items</string>
     <string name="label_prev">Prev</string>
     <string name="label_next">Next</string>
+    <string name="label_take_item">Take Item</string>
+    <string name="label_drop_item">Drop Item</string>
+    <string name="label_return">Return</string>
+
 </resources>
