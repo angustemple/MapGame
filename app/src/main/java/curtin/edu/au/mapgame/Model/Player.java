@@ -1,7 +1,10 @@
 package curtin.edu.au.mapgame.Model;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.*;
 
-public class Player
+public class Player implements Parcelable
 {
     // CLASSFIELDS --------------------------------------------------------------------------------------
     private int rowLocation;
@@ -30,7 +33,7 @@ public class Player
         this.cash = 0;
         this.health = 100.00;
         this.equipmentMass = 0.00;
-        this.equipmentList = new LinkedList<Equipment>();
+        this.equipmentList = new ArrayList<Equipment>();
     }
 
     // ACCESSORS -----------------------------------------------------------------------------------
@@ -123,5 +126,46 @@ public class Player
     {
         this.colLocation--;
         this.health = Math.max(0.0, this.health - 5.0 - (equipmentMass / 2.0));
+    }
+
+    // PARCELABLE METHODS --------------------------------------------------------------------------
+    @Override
+    public int describeContents()
+    {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int flags)
+    {
+        out.writeInt(rowLocation);
+        out.writeInt(colLocation);
+        out.writeInt(cash);
+        out.writeDouble(health);
+        out.writeDouble(equipmentMass);
+        out.writeList(equipmentList);
+    }
+
+    public static final Parcelable.Creator<Player> CREATOR = new Parcelable.Creator<Player>(){
+        public Player createFromParcel(Parcel in)
+        {
+            return new Player(in);
+        }
+
+        public Player[] newArray(int size)
+        {
+            return new Player[size];
+        }
+    };
+
+    private Player(Parcel in)
+    {
+        rowLocation = in.readInt();
+        colLocation = in.readInt();
+        cash = in.readInt();
+        health = in.readDouble();
+        equipmentMass = in.readDouble();
+        this.equipmentList = new ArrayList<Equipment>();
+        in.readList(this.equipmentList, Equipment.class.getClassLoader());
     }
 }

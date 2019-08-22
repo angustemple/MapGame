@@ -1,7 +1,11 @@
 package curtin.edu.au.mapgame.Model;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.lang.reflect.Array;
 import java.util.*;
 
-public class Area
+public class Area implements Parcelable
 {
     // CLASSFIELDS ---------------------------------------------------------------------------------
     private boolean town;
@@ -11,7 +15,7 @@ public class Area
     public Area()
     {
         this.town = false;
-        this.items = new LinkedList<Item>();
+        this.items = new ArrayList<Item>();
     }
 
     // ACCESSORS -----------------------------------------------------------------------------------
@@ -40,5 +44,38 @@ public class Area
     public void addItem(Item item)
     {
         items.add(item);
+    }
+
+    // PARCELABLE METHODS --------------------------------------------------------------------------
+    @Override
+    public int describeContents()
+    {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int flags)
+    {
+        out.writeInt(town ? 1 : 0);
+        out.writeList(items);
+    }
+
+    public static final Parcelable.Creator<Area> CREATOR = new Parcelable.Creator<Area>(){
+        public Area createFromParcel(Parcel in)
+        {
+            return new Area(in);
+        }
+
+        public Area[] newArray(int size)
+        {
+            return new Area[size];
+        }
+    };
+
+    private Area(Parcel in)
+    {
+        this.town = in.readInt() == 1;
+        this.items = new ArrayList<Item>();
+        in.readList(this.items, Item.class.getClassLoader());
     }
 }
