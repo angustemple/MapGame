@@ -108,8 +108,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="143dp"
-        android:layout_height="79dp"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:orientation="vertical"
@@ -120,31 +120,32 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_player_items">
 
         <TextView
-            android:id="@+id/tv_area_item_value2"
+            android:id="@+id/tv_player_item_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="TextView" />
+            android:text="@string/default_item_description" />
 
         <TextView
-            android:id="@+id/tv_food_equip2"
+            android:id="@+id/tv_player_health_mass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="TextView" />
+            android:text="@string/default_mass_health" />
 
         <TextView
-            android:id="@+id/tv_area_item_description2"
+            android:id="@+id/tv_player_item_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="TextView" />
+            android:text="@string/default_item_value" />
+
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/layout_area_items"
-        android:layout_width="151dp"
-        android:layout_height="87dp"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:orientation="vertical"
@@ -155,25 +156,25 @@
         app:layout_constraintVertical_bias="0.0">
 
         <TextView
-            android:id="@+id/tv_area_item_value"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/tv_food_equip"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="TextView" />
-
-        <TextView
             android:id="@+id/tv_area_item_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="TextView" />
+            android:text="@string/default_item_description" />
+
+        <TextView
+            android:id="@+id/tv_area_health_mass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/default_mass_health" />
+
+        <TextView
+            android:id="@+id/tv_area_item_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/default_item_value" />
 
     </LinearLayout>
 
@@ -249,7 +250,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_begin="205dp"
+        app:layout_constraintGuide_percent="0.50121653"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 

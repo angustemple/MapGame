@@ -21,6 +21,9 @@
     <string name="cannot_move">Cannot move any further in this direction</string>
 
     <!--Strings for WildernessOptionsActivity-->
+    <string name="default_item_description">Item Description</string>
+    <string name="default_item_value">Value: 0</string>
+    <string name="default_mass_health">Mass/Health: 0.00</string>
     <string name="label_area_items">Items in Area</string>
     <string name="label_player_items">Your Items</string>
     <string name="label_prev">Prev</string>
