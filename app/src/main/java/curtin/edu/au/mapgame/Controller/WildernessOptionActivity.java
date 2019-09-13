@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.List;
-
 import curtin.edu.au.mapgame.Model.Area;
 import curtin.edu.au.mapgame.Model.Equipment;
 import curtin.edu.au.mapgame.Model.Food;
@@ -77,7 +75,7 @@ public class WildernessOptionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Item i = currentArea.getItem(area_index);
+                Item i = currentArea.removeItem(area_index);
                 if(i instanceof Equipment)
                 {
                     player.addEquipment((Equipment) i);
@@ -86,6 +84,8 @@ public class WildernessOptionActivity extends AppCompatActivity {
                 {
                     player.consumeFood((Food) i);
                 }
+                updateArea();
+                updatePlayer();
             }
         });
 
@@ -160,13 +160,14 @@ public class WildernessOptionActivity extends AppCompatActivity {
         if(currentArea.getItemSize() > 0)
         {
             label_area_items.setText(String.valueOf("Items in Area: (" + (area_index + 1) + "/" + currentArea.getItemSize() + ")"));
-            curr_area_item = currentArea.getItem(area_index);
+            curr_area_item = currentArea.viewItem(area_index);
             area_item_description.setText(curr_area_item.getDescription());
             area_item_mass_health.setText(String.valueOf("Mass/Health: " + curr_area_item.getHealthMass()));
             area_value.setText(String.valueOf("Value: " + curr_area_item.getValue()));
         }
         else
         {
+            label_area_items.setText("Items in Area");
             area_item_description.setText("No Items");
             area_item_mass_health.setText("");
             area_value.setText("");
@@ -188,6 +189,7 @@ public class WildernessOptionActivity extends AppCompatActivity {
         }
         else
         {
+            label_player_items.setText("Your Items");
             player_item_description.setText("No Items");
             player_item_mass_health.setText("");
             player_value.setText("");

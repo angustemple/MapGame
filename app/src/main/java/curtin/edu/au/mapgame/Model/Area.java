@@ -24,11 +24,6 @@ public class Area implements Parcelable
         return this.town;
     }
 
-    public List<Item> getItems()
-    {
-        return this.items;
-    }
-
     public int getItemSize()
     {
         return this.items.size();
@@ -51,9 +46,14 @@ public class Area implements Parcelable
         items.add(item);
     }
 
-    public Item getItem(int i)
+    public Item viewItem(int i)
     {
         return items.get(i);
+    }
+
+    public Item removeItem(int i)
+    {
+        return items.remove(i);
     }
 
     // PARCELABLE METHODS --------------------------------------------------------------------------

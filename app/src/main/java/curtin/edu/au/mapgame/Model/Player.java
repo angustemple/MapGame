@@ -67,11 +67,6 @@ public class Player implements Parcelable
         return this.equipmentMass;
     }
 
-    public List<Equipment> getEquipmentList()
-    {
-        return this.equipmentList;
-    }
-
     public int getEquipmentSize()
     {
         return this.equipmentList.size();
