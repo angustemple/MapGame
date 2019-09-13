@@ -6,32 +6,15 @@ import java.util.*;
 
 public class Equipment extends Item implements Parcelable
 {
-
-    // CLASSFIELDS ---------------------------------------------------------------------------------
-    private String description;
-    private int value;
-    private double mass;
-
     // CONSTRUCTOR ---------------------------------------------------------------------------------
     public Equipment(String description, int value, double mass)
     {
-        this.description = description;
-        this.value = value;
-        this.mass = mass;
+        super(description, value, mass);
     }
 
     // ACCESSORS -----------------------------------------------------------------------------------
-    public double getMass()
-    {
-        return this.mass;
-    }
 
     // MUTATORS ------------------------------------------------------------------------------------
-    public void setMass(double mass)
-    {
-        this.mass = mass;
-    }
-
     @Override
     public int describeContents()
     {
@@ -41,9 +24,9 @@ public class Equipment extends Item implements Parcelable
     @Override
     public void writeToParcel(Parcel out, int flags)
     {
-        out.writeString(description);
-        out.writeInt(value);
-        out.writeDouble(mass);
+        out.writeString(super.description);
+        out.writeInt(super.value);
+        out.writeDouble(super.healthmass);
     }
 
     public static final Parcelable.Creator<Equipment> CREATOR = new Parcelable.Creator<Equipment>(){
@@ -60,8 +43,9 @@ public class Equipment extends Item implements Parcelable
 
     private Equipment(Parcel in)
     {
-        description = in.readString();
-        value = in.readInt();
-        mass = in.readDouble();
+        super();
+        super.description = in.readString();
+        super.value = in.readInt();
+        super.healthmass = in.readDouble();
     }
 }

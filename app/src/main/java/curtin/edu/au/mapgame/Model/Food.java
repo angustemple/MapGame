@@ -7,30 +7,13 @@ import java.util.*;
 
 public class Food extends Item implements Parcelable
 {
-    // CLASSFIELDS ---------------------------------------------------------------------------------
-    private String description;
-    private int value;
-    private double health;
-
     // CONSTRUCTOR ---------------------------------------------------------------------------------
     public Food(String description, int value, double health)
     {
-        this.description = description;
-        this.value = value;
-        this.health = health;
-    }
-    // ACCESSORS -----------------------------------------------------------------------------------
-    public double getHealth()
-    {
-        return this.health;
+        super(description, value, health);
     }
 
     // MUTATORS ------------------------------------------------------------------------------------
-    public void setHealth(double health)
-    {
-        this.health = health;
-    }
-
     @Override
     public int describeContents()
     {
@@ -40,9 +23,9 @@ public class Food extends Item implements Parcelable
     @Override
     public void writeToParcel(Parcel out, int flags)
     {
-        out.writeString(description);
-        out.writeInt(value);
-        out.writeDouble(health);
+        out.writeString(super.description);
+        out.writeInt(super.value);
+        out.writeDouble(super.healthmass);
     }
 
     public static final Parcelable.Creator<Food> CREATOR = new Parcelable.Creator<Food>(){
@@ -59,8 +42,9 @@ public class Food extends Item implements Parcelable
 
     private Food(Parcel in)
     {
-        description = in.readString();
-        value = in.readInt();
-        health = in.readDouble();
+        super();
+        super.description = in.readString();
+        super.value = in.readInt();
+        super.healthmass= in.readDouble();
     }
 }

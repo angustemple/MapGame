@@ -19,6 +19,10 @@ public class GameMap
     }
 
     // MUTATORS ------------------------------------------------------------------------------------
+    public void setArea(Area area, int x, int y)
+    {
+        grid[x][y] = area;
+    }
 
     // SPECIFIC METHODS ----------------------------------------------------------------------------
     private void initialiseArray()
@@ -57,6 +61,11 @@ public class GameMap
         Equipment flashlight = new Equipment("Flash Light, Black", 10, 1.00);
         Equipment rope = new Equipment("Thick Rope, Beige", 5, 2.00);
         Equipment macbook = new Equipment("Macbook Pro 2018, broken keyboard", 5000, 3.00);
+
+        // Put non essential items in random locations
+        grid[0][0].addItem(flashlight);
+        grid[2][3].addItem(rope);
+        grid[2][2].addItem(macbook);
 
         // Create some food items, put in town in grid[0][0]
         Food apple = new Food("Red Apple", 1, 5.00);

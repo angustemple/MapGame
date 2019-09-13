@@ -94,7 +94,7 @@ public class NavigationActivity extends AppCompatActivity
                 Intent i = new Intent(NavigationActivity.this, WildernessOptionActivity.class);
                 i.putExtra("Player", player);
                 i.putExtra("Area", currArea);
-                startActivity(i);
+                startActivityForResult(i, 0);
             }
         });
 
@@ -187,6 +187,16 @@ public class NavigationActivity extends AppCompatActivity
                 }
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        this.player = data.getParcelableExtra("Player");
+        this.currArea = data.getParcelableExtra("Area");
+        int x = player.getRowLocation();
+        int y = player.getColLocation();
+        map.setArea(currArea, x, y);
     }
 
     private void navCommonOperations()

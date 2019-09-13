@@ -57,6 +57,11 @@ public class Player implements Parcelable
         return this.health;
     }
 
+    public Equipment getEquipmentItem(int i)
+    {
+        return this.equipmentList.get(i);
+    }
+
     public double getEquipmentMass()
     {
         return this.equipmentMass;
@@ -65,6 +70,11 @@ public class Player implements Parcelable
     public List<Equipment> getEquipmentList()
     {
         return this.equipmentList;
+    }
+
+    public int getEquipmentSize()
+    {
+        return this.equipmentList.size();
     }
 
     // MUTATORS ------------------------------------------------------------------------------------
@@ -102,6 +112,23 @@ public class Player implements Parcelable
     public void addEquipment(Equipment newEquipment)
     {
         this.equipmentList.add(newEquipment);
+        this.equipmentMass += newEquipment.getHealthMass();
+    }
+
+    public void removeEquipment(Equipment removeEquipment)
+    {
+        this.equipmentList.remove(removeEquipment);
+        this.equipmentMass -= removeEquipment.getHealthMass();
+    }
+
+    public void consumeFood(Food inFood)
+    {
+        double hp = inFood.getHealthMass();
+        this.health += hp;
+        if(this.health > 100.00)
+        {
+            this.health = 100.00;
+        }
     }
 
     public void moveNorth()

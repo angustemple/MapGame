@@ -29,6 +29,11 @@ public class Area implements Parcelable
         return this.items;
     }
 
+    public int getItemSize()
+    {
+        return this.items.size();
+    }
+
     // MUTATORS ------------------------------------------------------------------------------------
     public void setTown(boolean town)
     {
@@ -44,6 +49,11 @@ public class Area implements Parcelable
     public void addItem(Item item)
     {
         items.add(item);
+    }
+
+    public Item getItem(int i)
+    {
+        return items.get(i);
     }
 
     // PARCELABLE METHODS --------------------------------------------------------------------------
