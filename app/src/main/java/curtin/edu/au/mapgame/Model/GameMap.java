@@ -40,11 +40,11 @@ public class GameMap
     {
         // Set Towns in three locations
         // No Items in this town
-        grid[0][1].setTown(true);
+        grid[0][1].setTown();
         // Road Map found in this town
-        grid[1][3].setTown(true);
+        grid[1][3].setTown();
         // Ice-Scraper found in this town
-        grid[3][1].setTown(true);
+        grid[3][1].setTown();
 
         // Create Essential Items
         Equipment jadeMonkey = new Equipment("Jade Monkey", 100, 2.00);

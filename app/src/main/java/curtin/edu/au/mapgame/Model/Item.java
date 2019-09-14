@@ -1,5 +1,4 @@
 package curtin.edu.au.mapgame.Model;
-import java.util.*;
 
 public abstract class Item
 {
@@ -8,14 +7,14 @@ public abstract class Item
     protected int value;
     protected double healthmass;
 
-    // Default Constructor -------------------------------------------------------------------------
-    public Item()
+    // DEFAULT CONSTRUCTOR -------------------------------------------------------------------------
+    Item()
     {
         // Do nothing
     }
 
-    // Constructor ---------------------------------------------------------------------------------
-    public Item(String description, int value, double healthmass)
+    // CONSTRUCTOR ---------------------------------------------------------------------------------
+    Item(String description, int value, double healthmass)
     {
         this.description = description;
         this.value = value;

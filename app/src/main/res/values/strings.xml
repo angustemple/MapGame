@@ -1,5 +1,7 @@
 <resources>
     <!--Strings for NavigationActivity-->
+    <string name="has_won">CONGRATULATIONS! \n YOU HAVE WON  THE GAME</string>
+    <string name="has_lost">Sorry, You Died.</string>
     <string name="app_name">MapGame</string>
     <string name="west">West</string>
     <string name="east">East</string>
@@ -19,6 +21,9 @@
     <string name="move_east">Moved 1 unit east&#8230;</string>
     <string name="move_west">Moved 1 unit west&#8230;</string>
     <string name="cannot_move">Cannot move any further in this direction</string>
+    <string name="town">Town</string>
+    <string name="wilderness">Wilderness</string>
+    <string name="location">Current Location: [%d][%d]</string>
 
     <!--Strings for WildernessOptionsActivity-->
     <string name="default_item_description">Item Description</string>
@@ -42,6 +47,10 @@
     <string name="label_buy_item">Buy Item</string>
     <string name="label_sell_item">Sell Item</string>
     <string name="cannot_buy">Cannot purchase item!</string>
+    <string name="marketplace">Market</string>
+
+    <!--Strings for WinLoseActivity-->
+    <string name="label_default">default</string>
 
 
 </resources>

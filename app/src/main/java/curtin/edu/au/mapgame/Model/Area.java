@@ -2,7 +2,6 @@ package curtin.edu.au.mapgame.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Area implements Parcelable
@@ -15,11 +14,11 @@ public class Area implements Parcelable
     Area()
     {
         this.town = false;
-        this.items = new ArrayList<Item>();
+        this.items = new ArrayList<>();
     }
 
     // ACCESSORS -----------------------------------------------------------------------------------
-    public boolean getTown()
+    public boolean isTown()
     {
         return this.town;
     }
@@ -30,14 +29,9 @@ public class Area implements Parcelable
     }
 
     // MUTATORS ------------------------------------------------------------------------------------
-    public void setTown(boolean town)
+    void setTown()
     {
-        this.town = town;
-    }
-
-    public void setItems(List<Item> items)
-    {
-        this.items = items;
+        this.town = true;
     }
 
     // SPECIFIC METHODS ----------------------------------------------------------------------------
@@ -85,7 +79,7 @@ public class Area implements Parcelable
     private Area(Parcel in)
     {
         this.town = in.readInt() == 1;
-        this.items = new ArrayList<Item>();
+        this.items = new ArrayList<>();
         in.readList(this.items, Item.class.getClassLoader());
     }
 }

@@ -75,36 +75,25 @@ public class WildernessOptionActivity extends AppCompatActivity {
             {
                 if(currentArea.getItemSize() > 0)
                 {
-                    if(area_index == currentArea.getItemSize() - 1 && currentArea.getItemSize() > 1)
+                    if(area_index < currentArea.getItemSize())
                     {
                         Item i = currentArea.removeItem(area_index);
+                        if(i instanceof Food)
+                        {
+                            player.consumeFood((Food) i);
+                        }
+                        else if(i instanceof Equipment)
+                        {
+                            player.addEquipment((Equipment) i);
+                        }
+                    }
 
-                        if(i instanceof Food)
-                        {
-                            player.consumeFood((Food) i);
-                        }
-                        else if(i instanceof Equipment)
-                        {
-                            player.addEquipment((Equipment) i);
-                        }
-                        area_index--;
-                        updateArea();
-                        updatePlayer();
-                    }
-                    else if(area_index < currentArea.getItemSize())
+                    if(area_index == currentArea.getItemSize() && currentArea.getItemSize() >= 1)
                     {
-                        Item i = currentArea.removeItem(area_index);
-                        if(i instanceof Food)
-                        {
-                            player.consumeFood((Food) i);
-                        }
-                        else if(i instanceof Equipment)
-                        {
-                            player.addEquipment((Equipment) i);
-                        }
-                        updateArea();
-                        updatePlayer();
+                        area_index--;
                     }
+                    updateArea();
+                    updatePlayer();
                 }
             }
         });
@@ -116,21 +105,18 @@ public class WildernessOptionActivity extends AppCompatActivity {
             {
                 if(player.getEquipmentSize() > 0)
                 {
-                    if(player_index == player.getEquipmentSize() - 1 && player.getEquipmentSize() > 1)
+                    if(player_index < player.getEquipmentSize())
                     {
                         Item i = player.removeEquipment(player_index);
                         currentArea.addItem(i);
+                    }
+
+                    if(player_index == player.getEquipmentSize() && player.getEquipmentSize() >= 1)
+                    {
                         player_index--;
-                        updateArea();
-                        updatePlayer();
                     }
-                    else if(player_index < player.getEquipmentSize())
-                    {
-                        Item i = player.removeEquipment(player_index);
-                        currentArea.addItem(i);
-                        updateArea();
-                        updatePlayer();
-                    }
+                    updateArea();
+                    updatePlayer();
                 }
             }
         });
@@ -228,7 +214,7 @@ public class WildernessOptionActivity extends AppCompatActivity {
         if(player.getEquipmentSize() > 0)
         {
             label_player_items.setText(getString(R.string.label_player_items, player_index + 1, player.getEquipmentSize()));
-            Equipment curr_player_item = player.getEquipmentItem(player_index);
+            Equipment curr_player_item = player.viewEquipmentItem(player_index);
             player_item_description.setText(curr_player_item.getDescription());
             player_item_mass_health.setText(getString(R.string.label_mass, curr_player_item.getHealthMass()));
             player_value.setText(getString(R.string.label_value, curr_player_item.getValue()));

@@ -15,17 +15,6 @@ public class Player implements Parcelable
     private List<Equipment> equipmentList;
 
     // CONSTRUCTORS --------------------------------------------------------------------------------
-    public Player(int rowLocation, int colLocation, int cash, double health, double equipmentMass,
-                  List<Equipment> equipmentList)
-    {
-        this.rowLocation = rowLocation;
-        this.colLocation = colLocation;
-        this.cash = cash;
-        this.health = health;
-        this.equipmentMass = equipmentMass;
-        this.equipmentList = equipmentList;
-    }
-
     public Player()
     {
         this.rowLocation = 0;
@@ -33,7 +22,7 @@ public class Player implements Parcelable
         this.cash = 0;
         this.health = 100.00;
         this.equipmentMass = 0.00;
-        this.equipmentList = new ArrayList<Equipment>();
+        this.equipmentList = new ArrayList<>();
     }
 
     // ACCESSORS -----------------------------------------------------------------------------------
@@ -57,11 +46,6 @@ public class Player implements Parcelable
         return this.health;
     }
 
-    public Equipment getEquipmentItem(int i)
-    {
-        return this.equipmentList.get(i);
-    }
-
     public double getEquipmentMass()
     {
         return this.equipmentMass;
@@ -73,37 +57,37 @@ public class Player implements Parcelable
     }
 
     // MUTATORS ------------------------------------------------------------------------------------
-    public void setRowLocation(int rowLocation)
-    {
-        this.rowLocation = rowLocation;
-    }
-
-    public void setColLocation(int colLocation)
-    {
-        this.colLocation = colLocation;
-    }
-
     public void setCash(int cash)
     {
         this.cash = cash;
     }
 
-    public void setHealth(double health)
-    {
-        this.health = health;
-    }
-
-    public void setEquipmentMass(double equipmentMass)
-    {
-        this.equipmentMass = equipmentMass;
-    }
-
-    public void setEquipmentList(List<Equipment> equipmentList)
-    {
-        this.equipmentList = equipmentList;
-    }
-
     // SPECIFIC METHODS ----------------------------------------------------------------------------
+    public boolean hasAllItems()
+    {
+        boolean monkey = false;
+        boolean roadmap = false;
+        boolean icescraper = false;
+
+        for(Equipment item : equipmentList)
+        {
+            switch(item.getDescription())
+            {
+                case "Jade Monkey":
+                    monkey = true;
+                    break;
+                case "Ice Scraper":
+                    icescraper = true;
+                    break;
+                case "Road Map":
+                    roadmap = true;
+                    break;
+            }
+        }
+
+        return(monkey && icescraper && roadmap);
+    }
+
     public void addEquipment(Equipment newEquipment)
     {
         this.equipmentList.add(newEquipment);
@@ -115,6 +99,11 @@ public class Player implements Parcelable
         Equipment equip = this.equipmentList.remove(i);
         this.equipmentMass -= equip.getHealthMass();
         return equip;
+    }
+
+    public Equipment viewEquipmentItem(int i)
+    {
+        return this.equipmentList.get(i);
     }
 
     public void consumeFood(Food inFood)
@@ -188,7 +177,7 @@ public class Player implements Parcelable
         cash = in.readInt();
         health = in.readDouble();
         equipmentMass = in.readDouble();
-        this.equipmentList = new ArrayList<Equipment>();
+        this.equipmentList = new ArrayList<>();
         in.readList(this.equipmentList, Equipment.class.getClassLoader());
     }
 }

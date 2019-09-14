@@ -63,7 +63,7 @@ public class MarketOptionActivity extends AppCompatActivity {
         Button btn_player_next = findViewById(R.id.btn_player_item_next);
         Button btn_player_prev = findViewById(R.id.btn_player_item_prev);
         Button btn_buy_item = findViewById(R.id.btn_buy_item);
-        Button btn_sell_item = findViewById(R.id.btnn_sell_item);
+        Button btn_sell_item = findViewById(R.id.btn_sell_item);
 
         updateArea();
         updatePlayer();
@@ -76,53 +76,36 @@ public class MarketOptionActivity extends AppCompatActivity {
             {
                 if(currentArea.getItemSize() > 0)
                 {
-                    if(area_index == currentArea.getItemSize() - 1 && currentArea.getItemSize() > 1)
+                    Item i = currentArea.viewItem(area_index);
+                    if(player.getCash() >= i.getValue())
                     {
-                        Item i = currentArea.viewItem(area_index);
+                        if(area_index < currentArea.getItemSize())
+                        {
+                            i = currentArea.removeItem(area_index);
+                            if(i instanceof Food)
+                            {
+                                player.setCash(player.getCash() - i.getValue());
+                                player.consumeFood((Food) i);
+                            }
+                            else if(i instanceof Equipment)
+                            {
+                                player.setCash(player.getCash() - i.getValue());
+                                player.addEquipment((Equipment) i);
+                            }
+                        }
 
-                        if(player.getCash() >= i.getValue())
+                        if(area_index == currentArea.getItemSize() && currentArea.getItemSize() >= 1)
                         {
-                            i = currentArea.removeItem(area_index);
-                            if(i instanceof Food)
-                            {
-                                player.setCash(player.getCash() - i.getValue());
-                                player.consumeFood((Food) i);
-                            }
-                            else if(i instanceof Equipment)
-                            {
-                                player.setCash(player.getCash() - i.getValue());
-                                player.addEquipment((Equipment) i);
-                            }
                             area_index--;
-                            updateArea();
-                            updatePlayer();
                         }
-                        else
-                        {
-                            Toast toast = Toast.makeText(MarketOptionActivity.this, R.string.cannot_buy, Toast.LENGTH_SHORT);
-                            toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 125);
-                            toast.show();
-                        }
+                        updateArea();
+                        updatePlayer();
                     }
-                    else if(area_index < currentArea.getItemSize())
+                    else
                     {
-                        Item i = currentArea.viewItem(area_index);
-                        if(player.getCash() >= i.getValue())
-                        {
-                            i = currentArea.removeItem(area_index);
-                            if(i instanceof Food)
-                            {
-                                player.setCash(player.getCash() - i.getValue());
-                                player.consumeFood((Food) i);
-                            }
-                            else if(i instanceof Equipment)
-                            {
-                                player.setCash(player.getCash() - i.getValue());
-                                player.addEquipment((Equipment) i);
-                            }
-                            updateArea();
-                            updatePlayer();
-                        }
+                        Toast toast = Toast.makeText(MarketOptionActivity.this, R.string.cannot_buy, Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 125);
+                        toast.show();
                     }
                 }
             }
@@ -135,21 +118,19 @@ public class MarketOptionActivity extends AppCompatActivity {
             {
                 if(player.getEquipmentSize() > 0)
                 {
-                    if(player_index == player.getEquipmentSize() - 1 && player.getEquipmentSize() > 1)
+                    if(player_index < player.getEquipmentSize())
                     {
                         Item i = player.removeEquipment(player_index);
+                        player.setCash(player.getCash() + i.getValue());
                         currentArea.addItem(i);
+                    }
+
+                    if(player_index == player.getEquipmentSize() && player.getEquipmentSize() >= 1)
+                    {
                         player_index--;
-                        updateArea();
-                        updatePlayer();
                     }
-                    else if(player_index < player.getEquipmentSize())
-                    {
-                        Item i = player.removeEquipment(player_index);
-                        currentArea.addItem(i);
-                        updateArea();
-                        updatePlayer();
-                    }
+                    updateArea();
+                    updatePlayer();
                 }
             }
         });
@@ -247,7 +228,7 @@ public class MarketOptionActivity extends AppCompatActivity {
         if(player.getEquipmentSize() > 0)
         {
             label_player_items.setText(getString(R.string.label_player_items, player_index + 1, player.getEquipmentSize()));
-            Equipment curr_player_item = player.getEquipmentItem(player_index);
+            Equipment curr_player_item = player.viewEquipmentItem(player_index);
             player_item_description.setText(curr_player_item.getDescription());
             player_item_mass_health.setText(getString(R.string.label_mass, curr_player_item.getHealthMass()));
             player_value.setText(getString(R.string.label_value, curr_player_item.getValue()));

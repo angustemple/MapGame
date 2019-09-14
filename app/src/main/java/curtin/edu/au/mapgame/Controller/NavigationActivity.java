@@ -2,7 +2,6 @@ package curtin.edu.au.mapgame.Controller;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcel;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -18,22 +17,16 @@ import curtin.edu.au.mapgame.R;
 
 public class NavigationActivity extends AppCompatActivity
 {
+    private static final String PLAYER_HAS_WON = "Player has won";
     private static final int MAX_LOC = 3;
     private Player player;
     private GameMap map;
-    private Button north;
-    private Button south;
-    private Button east;
-    private Button west;
     private TextView health;
     private TextView cash;
     private TextView mass;
     private TextView location;
-    private Button restart;
-    private Button options;
     private Area currArea;
     private TextView areaDescription;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -58,16 +51,16 @@ public class NavigationActivity extends AppCompatActivity
         areaDescription = findViewById(R.id.tv_area_description);
 
         // Connect Navigation Buttons --------------------------------------------------------------
-        north = findViewById(R.id.btn_north);
-        south = findViewById(R.id.btn_south);
-        east = findViewById(R.id.btn_east);
-        west = findViewById(R.id.btn_west);
+        Button north = findViewById(R.id.btn_north);
+        Button south = findViewById(R.id.btn_south);
+        Button east = findViewById(R.id.btn_east);
+        Button west = findViewById(R.id.btn_west);
 
         // Connect Options Button ------------------------------------------------------------------
-        options = findViewById(R.id.btn_options);
+        Button options = findViewById(R.id.btn_options);
 
         // Connect Restart Button ------------------------------------------------------------------
-        restart = findViewById(R.id.btn_restart);
+        Button restart = findViewById(R.id.btn_restart);
 
         // Add Restart Button Listener -------------------------------------------------------------
         restart.setOnClickListener(new View.OnClickListener()
@@ -75,14 +68,7 @@ public class NavigationActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                player = new Player();
-                map = new GameMap();
-                currArea = map.getArea(0, 0);
-                health.setText(R.string.default_health);
-                cash.setText(R.string.default_cash);
-                mass.setText(R.string.default_mass);
-                location.setText(R.string.default_location);
-                areaDescription.setText(R.string.label_wilderness);
+                restartGame();
             }
         });
 
@@ -92,10 +78,20 @@ public class NavigationActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Intent i = new Intent(NavigationActivity.this, WildernessOptionActivity.class);
-                i.putExtra("Player", player);
-                i.putExtra("Area", currArea);
-                startActivityForResult(i, 0);
+                if(currArea.isTown())
+                {
+                    Intent i = new Intent(NavigationActivity.this, MarketOptionActivity.class);
+                    i.putExtra("Player", player);
+                    i.putExtra("Area", currArea);
+                    startActivityForResult(i, 0);
+                }
+                else
+                {
+                    Intent i = new Intent(NavigationActivity.this, WildernessOptionActivity.class);
+                    i.putExtra("Player", player);
+                    i.putExtra("Area", currArea);
+                    startActivityForResult(i, 0);
+                }
             }
         });
 
@@ -107,11 +103,14 @@ public class NavigationActivity extends AppCompatActivity
             {
                 if(player.getRowLocation() > 0)
                 {
-                    Toast toast = Toast.makeText(NavigationActivity.this, R.string.move_north, Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 125);
-                    toast.show();
                     player.moveNorth();
                     navCommonOperations();
+                    if(playerHasLost())
+                    {
+                        Intent i = new Intent(NavigationActivity.this, WinLoseActivity.class);
+                        i.putExtra(PLAYER_HAS_WON, false);
+                        startActivityForResult(i, 1);
+                    }
                 }
                 else
                 {
@@ -129,11 +128,14 @@ public class NavigationActivity extends AppCompatActivity
             {
                 if(player.getRowLocation() < MAX_LOC)
                 {
-                    Toast toast = Toast.makeText(NavigationActivity.this, R.string.move_south, Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 125);
-                    toast.show();
                     player.moveSouth();
                     navCommonOperations();
+                    if(playerHasLost())
+                    {
+                        Intent i = new Intent(NavigationActivity.this, WinLoseActivity.class);
+                        i.putExtra(PLAYER_HAS_WON, false);
+                        startActivityForResult(i, 1);
+                    }
                 }
                 else
                 {
@@ -151,11 +153,14 @@ public class NavigationActivity extends AppCompatActivity
             {
                 if(player.getColLocation() < MAX_LOC)
                 {
-                    Toast toast = Toast.makeText(NavigationActivity.this, R.string.move_east, Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 125);
-                    toast.show();
                     player.moveEast();
                     navCommonOperations();
+                    if(playerHasLost())
+                    {
+                        Intent i = new Intent(NavigationActivity.this, WinLoseActivity.class);
+                        i.putExtra(PLAYER_HAS_WON, false);
+                        startActivityForResult(i, 1);
+                    }
                 }
                 else
                 {
@@ -174,11 +179,14 @@ public class NavigationActivity extends AppCompatActivity
 
                 if(player.getColLocation() > 0)
                 {
-                    Toast toast = Toast.makeText(NavigationActivity.this, R.string.move_west, Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 125);
-                    toast.show();
                     player.moveWest();
                     navCommonOperations();
+                    if(playerHasLost())
+                    {
+                        Intent i = new Intent(NavigationActivity.this, WinLoseActivity.class);
+                        i.putExtra(PLAYER_HAS_WON, false);
+                        startActivityForResult(i, 1);
+                    }
                 }
                 else
                 {
@@ -193,10 +201,61 @@ public class NavigationActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        Player returnedPlayer = data.getParcelableExtra("Player");
-        Area returnedArea = data.getParcelableExtra("Area");
-        updateArea(returnedArea);
-        updatePlayer(returnedPlayer);
+        if(requestCode == 0)
+        {
+            Player returnedPlayer = data.getParcelableExtra("Player");
+            Area returnedArea = data.getParcelableExtra("Area");
+            if(returnedArea != null)
+            {
+                updateArea(returnedArea);
+            }
+            if(returnedPlayer != null)
+            {
+                updatePlayer(returnedPlayer);
+            }
+
+            if(playerHasWon())
+            {
+                Intent i = new Intent(NavigationActivity.this, WinLoseActivity.class);
+                i.putExtra(PLAYER_HAS_WON, true);
+                startActivityForResult(i, 1);
+            }
+            else if(playerHasLost())
+            {
+                Intent i = new Intent(NavigationActivity.this, WinLoseActivity.class);
+                i.putExtra(PLAYER_HAS_WON, false);
+                startActivityForResult(i, 1);
+            }
+        }
+        else if(requestCode == 1)
+        {
+            if(resultCode == 1)
+            {
+                restartGame();
+            }
+        }
+    }
+
+    private void restartGame()
+    {
+        player = new Player();
+        map = new GameMap();
+        currArea = map.getArea(0, 0);
+        health.setText(R.string.default_health);
+        cash.setText(R.string.default_cash);
+        mass.setText(R.string.default_mass);
+        location.setText(R.string.default_location);
+        areaDescription.setText(R.string.label_wilderness);
+    }
+
+    private boolean playerHasWon()
+    {
+        return player.hasAllItems();
+    }
+
+    private boolean playerHasLost()
+    {
+        return (player.getHealth() <= 0);
     }
 
     private void updateArea(Area newArea)
@@ -208,20 +267,15 @@ public class NavigationActivity extends AppCompatActivity
     private void updatePlayer(Player player)
     {
         this.player = player;
-        updateTextViews();
-    }
-
-    private void updateTextViews()
-    {
-        this.health.setText(String.valueOf("Health: " + player.getHealth()));
-        this.cash.setText(String.valueOf("Cash: " + player.getCash()));
-        this.mass.setText(String.valueOf("Mass: " + player.getEquipmentMass()));
+        this.health.setText(getString(R.string.label_health, player.getHealth()));
+        this.cash.setText(getString(R.string.label_cash, player.getCash()));
+        this.mass.setText(getString(R.string.label_mass, player.getEquipmentMass()));
     }
 
     private void navCommonOperations()
     {
         currArea = map.getArea(player.getRowLocation(), player.getColLocation());
-        if(currArea.getTown())
+        if(currArea.isTown())
         {
             areaDescription.setText(R.string.label_town);
         }
@@ -229,7 +283,7 @@ public class NavigationActivity extends AppCompatActivity
         {
             areaDescription.setText(R.string.label_wilderness);
         }
-        health.setText(String.valueOf("Health: " + player.getHealth()));
-        location.setText(String.valueOf("Current Location: " + "[" + player.getRowLocation() + "][" + player.getColLocation() + "]"));
+        this.health.setText(getString(R.string.label_health, player.getHealth()));
+        this.location.setText(getString(R.string.location, player.getRowLocation(), player.getColLocation()));
     }
 }
