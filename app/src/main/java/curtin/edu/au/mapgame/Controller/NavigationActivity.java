@@ -77,6 +77,7 @@ public class NavigationActivity extends AppCompatActivity
             {
                 player = new Player();
                 map = new GameMap();
+                currArea = map.getArea(0, 0);
                 health.setText(R.string.default_health);
                 cash.setText(R.string.default_cash);
                 mass.setText(R.string.default_mass);
@@ -192,11 +193,29 @@ public class NavigationActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        this.player = data.getParcelableExtra("Player");
-        this.currArea = data.getParcelableExtra("Area");
-        int x = player.getRowLocation();
-        int y = player.getColLocation();
-        map.setArea(currArea, x, y);
+        Player returnedPlayer = data.getParcelableExtra("Player");
+        Area returnedArea = data.getParcelableExtra("Area");
+        updateArea(returnedArea);
+        updatePlayer(returnedPlayer);
+    }
+
+    private void updateArea(Area newArea)
+    {
+        currArea = newArea;
+        map.setArea(currArea, player.getRowLocation(), player.getColLocation());
+    }
+
+    private void updatePlayer(Player player)
+    {
+        this.player = player;
+        updateTextViews();
+    }
+
+    private void updateTextViews()
+    {
+        this.health.setText(String.valueOf("Health: " + player.getHealth()));
+        this.cash.setText(String.valueOf("Cash: " + player.getCash()));
+        this.mass.setText(String.valueOf("Mass: " + player.getEquipmentMass()));
     }
 
     private void navCommonOperations()

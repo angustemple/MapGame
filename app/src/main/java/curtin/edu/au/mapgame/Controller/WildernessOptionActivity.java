@@ -29,8 +29,6 @@ public class WildernessOptionActivity extends AppCompatActivity {
     private TextView health;
     private TextView cash;
     private TextView mass;
-    private Item curr_area_item;
-    private Item curr_player_item;
     private int area_index = 0;
     private int player_index = 0;
 
@@ -41,8 +39,8 @@ public class WildernessOptionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_wilderness_option);
 
         // Get Data From Intent --------------------------------------------------------------------
-        player = (Player) getIntent().getParcelableExtra("Player");
-        currentArea = (Area) getIntent().getParcelableExtra("Area");
+        player = getIntent().getParcelableExtra("Player");
+        currentArea = getIntent().getParcelableExtra("Area");
 
         // Connect TextViews -----------------------------------------------------------------------
         area_item_description = findViewById(R.id.tv_area_item_description);
@@ -75,17 +73,67 @@ public class WildernessOptionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Item i = currentArea.removeItem(area_index);
-                if(i instanceof Equipment)
+                if(currentArea.getItemSize() > 0)
                 {
-                    player.addEquipment((Equipment) i);
+                    if(area_index == currentArea.getItemSize() - 1 && currentArea.getItemSize() > 1)
+                    {
+                        Item i = currentArea.removeItem(area_index);
+                        System.out.println("ITEMS: " + currentArea.getItemSize());
+
+                        if(i instanceof Food)
+                        {
+                            player.consumeFood((Food) i);
+                        }
+                        else if(i instanceof Equipment)
+                        {
+                            player.addEquipment((Equipment) i);
+                        }
+                        area_index--;
+                        updateArea();
+                        updatePlayer();
+                    }
+                    else if(area_index < currentArea.getItemSize())
+                    {
+                        Item i = currentArea.removeItem(area_index);
+                        System.out.println("ITEMS: " + currentArea.getItemSize());
+                        if(i instanceof Food)
+                        {
+                            player.consumeFood((Food) i);
+                        }
+                        else if(i instanceof Equipment)
+                        {
+                            player.addEquipment((Equipment) i);
+                        }
+                        updateArea();
+                        updatePlayer();
+                    }
                 }
-                else if(i instanceof Food)
+            }
+        });
+
+        btn_drop_item.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if(player.getEquipmentSize() > 0)
                 {
-                    player.consumeFood((Food) i);
+                    if(player_index == player.getEquipmentSize() - 1 && player.getEquipmentSize() > 1)
+                    {
+                        Item i = player.removeEquipment(player_index);
+                        currentArea.addItem(i);
+                        player_index--;
+                        updateArea();
+                        updatePlayer();
+                    }
+                    else if(player_index < player.getEquipmentSize())
+                    {
+                        Item i = player.removeEquipment(player_index);
+                        currentArea.addItem(i);
+                        updateArea();
+                        updatePlayer();
+                    }
                 }
-                updateArea();
-                updatePlayer();
             }
         });
 
@@ -159,40 +207,40 @@ public class WildernessOptionActivity extends AppCompatActivity {
     {
         if(currentArea.getItemSize() > 0)
         {
-            label_area_items.setText(String.valueOf("Items in Area: (" + (area_index + 1) + "/" + currentArea.getItemSize() + ")"));
-            curr_area_item = currentArea.viewItem(area_index);
+            label_area_items.setText(getString(R.string.label_area_items, area_index + 1, currentArea.getItemSize()));
+            Item curr_area_item = currentArea.viewItem(area_index);
             area_item_description.setText(curr_area_item.getDescription());
-            area_item_mass_health.setText(String.valueOf("Mass/Health: " + curr_area_item.getHealthMass()));
-            area_value.setText(String.valueOf("Value: " + curr_area_item.getValue()));
+            area_item_mass_health.setText(getString(R.string.label_mass, curr_area_item.getHealthMass()));
+            area_value.setText(getString(R.string.label_value, curr_area_item.getValue()));
         }
         else
         {
-            label_area_items.setText("Items in Area");
-            area_item_description.setText("No Items");
-            area_item_mass_health.setText("");
-            area_value.setText("");
+            label_area_items.setText(getString(R.string.label_area_items, area_index, currentArea.getItemSize()));
+            area_item_description.setText(R.string.label_no_items);
+            area_item_mass_health.setText(R.string.label_blank);
+            area_value.setText(R.string.label_blank);
         }
     }
 
     private void updatePlayer()
     {
-        health.setText(String.valueOf("Health: " + player.getHealth()));
-        cash.setText(String.valueOf("Cash: " + player.getCash()));
-        mass.setText(String.valueOf("Mass: " + player.getEquipmentMass()));
+        health.setText(getString(R.string.label_health, player.getHealth()));
+        cash.setText(getString(R.string.label_cash, player.getCash()));
+        mass.setText(getString(R.string.label_mass, player.getEquipmentMass()));
         if(player.getEquipmentSize() > 0)
         {
-            label_player_items.setText(String.valueOf("Your Items: (" + (player_index + 1) + "/" + player.getEquipmentSize() + ")"));
-            curr_player_item = player.getEquipmentItem(player_index);
+            label_player_items.setText(getString(R.string.label_player_items, player_index + 1, player.getEquipmentSize()));
+            Equipment curr_player_item = player.getEquipmentItem(player_index);
             player_item_description.setText(curr_player_item.getDescription());
-            player_item_mass_health.setText(String.valueOf("Mass/Health: " + curr_player_item.getHealthMass()));
-            player_value.setText(String.valueOf("Value: " + curr_player_item.getValue()));
+            player_item_mass_health.setText(getString(R.string.label_mass, curr_player_item.getHealthMass()));
+            player_value.setText(getString(R.string.label_value, curr_player_item.getValue()));
         }
         else
         {
-            label_player_items.setText("Your Items");
-            player_item_description.setText("No Items");
-            player_item_mass_health.setText("");
-            player_value.setText("");
+            label_player_items.setText(getString(R.string.label_player_items, player_index, player.getEquipmentSize()));
+            player_item_description.setText(R.string.label_no_items);
+            player_item_mass_health.setText(R.string.label_blank);
+            player_value.setText(R.string.label_blank);
         }
     }
 }

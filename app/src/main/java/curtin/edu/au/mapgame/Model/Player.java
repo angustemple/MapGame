@@ -110,10 +110,11 @@ public class Player implements Parcelable
         this.equipmentMass += newEquipment.getHealthMass();
     }
 
-    public void removeEquipment(Equipment removeEquipment)
+    public Equipment removeEquipment(int i)
     {
-        this.equipmentList.remove(removeEquipment);
-        this.equipmentMass -= removeEquipment.getHealthMass();
+        Equipment equip = this.equipmentList.remove(i);
+        this.equipmentMass -= equip.getHealthMass();
+        return equip;
     }
 
     public void consumeFood(Food inFood)

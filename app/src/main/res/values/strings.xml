@@ -24,12 +24,18 @@
     <string name="default_item_description">Item Description</string>
     <string name="default_item_value">Value: 0</string>
     <string name="default_mass_health">Mass/Health: 0.00</string>
-    <string name="label_area_items">Items in Area</string>
-    <string name="label_player_items">Your Items</string>
+    <string name="label_health">Health: %.2f</string>
+    <string name="label_cash">Cash: %d</string>
+    <string name="label_mass">Mass: %.2f</string>
+    <string name="label_value">Value: %d</string>
+    <string name="label_area_items">Items in Area (%d/%d)</string>
+    <string name="label_no_items">No Items</string>
+    <string name="label_player_items">Your Items (%d/%d)</string>
     <string name="label_prev">Prev</string>
     <string name="label_next">Next</string>
     <string name="label_take_item">Take Item</string>
     <string name="label_drop_item">Drop Item</string>
     <string name="label_return">Return</string>
+    <string name="label_blank"> </string>
 
 </resources>
