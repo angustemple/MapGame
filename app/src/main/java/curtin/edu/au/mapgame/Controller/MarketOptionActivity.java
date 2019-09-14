@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import curtin.edu.au.mapgame.Model.Area;
 import curtin.edu.au.mapgame.Model.Equipment;
@@ -15,7 +17,7 @@ import curtin.edu.au.mapgame.Model.Item;
 import curtin.edu.au.mapgame.Model.Player;
 import curtin.edu.au.mapgame.R;
 
-public class WildernessOptionActivity extends AppCompatActivity {
+public class MarketOptionActivity extends AppCompatActivity {
     private Area currentArea;
     private Player player;
     private TextView area_item_description;
@@ -32,11 +34,10 @@ public class WildernessOptionActivity extends AppCompatActivity {
     private int area_index = 0;
     private int player_index = 0;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wilderness_option);
+        setContentView(R.layout.activity_market_option);
 
         // Get Data From Intent --------------------------------------------------------------------
         player = getIntent().getParcelableExtra("Player");
@@ -61,14 +62,14 @@ public class WildernessOptionActivity extends AppCompatActivity {
         Button btn_area_prev = findViewById(R.id.btn_area_item_prev);
         Button btn_player_next = findViewById(R.id.btn_player_item_next);
         Button btn_player_prev = findViewById(R.id.btn_player_item_prev);
-        Button btn_take_item = findViewById(R.id.btn_buy_item);
-        Button btn_drop_item = findViewById(R.id.btnn_sell_item);
+        Button btn_buy_item = findViewById(R.id.btn_buy_item);
+        Button btn_sell_item = findViewById(R.id.btnn_sell_item);
 
         updateArea();
         updatePlayer();
 
         // Button Listeners ------------------------------------------------------------------------
-        btn_take_item.setOnClickListener(new View.OnClickListener()
+        btn_buy_item.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -77,39 +78,57 @@ public class WildernessOptionActivity extends AppCompatActivity {
                 {
                     if(area_index == currentArea.getItemSize() - 1 && currentArea.getItemSize() > 1)
                     {
-                        Item i = currentArea.removeItem(area_index);
+                        Item i = currentArea.viewItem(area_index);
 
-                        if(i instanceof Food)
+                        if(player.getCash() >= i.getValue())
                         {
-                            player.consumeFood((Food) i);
+                            i = currentArea.removeItem(area_index);
+                            if(i instanceof Food)
+                            {
+                                player.setCash(player.getCash() - i.getValue());
+                                player.consumeFood((Food) i);
+                            }
+                            else if(i instanceof Equipment)
+                            {
+                                player.setCash(player.getCash() - i.getValue());
+                                player.addEquipment((Equipment) i);
+                            }
+                            area_index--;
+                            updateArea();
+                            updatePlayer();
                         }
-                        else if(i instanceof Equipment)
+                        else
                         {
-                            player.addEquipment((Equipment) i);
+                            Toast toast = Toast.makeText(MarketOptionActivity.this, R.string.cannot_buy, Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 125);
+                            toast.show();
                         }
-                        area_index--;
-                        updateArea();
-                        updatePlayer();
                     }
                     else if(area_index < currentArea.getItemSize())
                     {
-                        Item i = currentArea.removeItem(area_index);
-                        if(i instanceof Food)
+                        Item i = currentArea.viewItem(area_index);
+                        if(player.getCash() >= i.getValue())
                         {
-                            player.consumeFood((Food) i);
+                            i = currentArea.removeItem(area_index);
+                            if(i instanceof Food)
+                            {
+                                player.setCash(player.getCash() - i.getValue());
+                                player.consumeFood((Food) i);
+                            }
+                            else if(i instanceof Equipment)
+                            {
+                                player.setCash(player.getCash() - i.getValue());
+                                player.addEquipment((Equipment) i);
+                            }
+                            updateArea();
+                            updatePlayer();
                         }
-                        else if(i instanceof Equipment)
-                        {
-                            player.addEquipment((Equipment) i);
-                        }
-                        updateArea();
-                        updatePlayer();
                     }
                 }
             }
         });
 
-        btn_drop_item.setOnClickListener(new View.OnClickListener()
+        btn_sell_item.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)

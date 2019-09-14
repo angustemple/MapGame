@@ -3,12 +3,10 @@ package curtin.edu.au.mapgame.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.*;
-
 public class Food extends Item implements Parcelable
 {
     // CONSTRUCTOR ---------------------------------------------------------------------------------
-    public Food(String description, int value, double health)
+    Food(String description, int value, double health)
     {
         super(description, value, health);
     }

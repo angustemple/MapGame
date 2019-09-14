@@ -12,7 +12,7 @@ public class Area implements Parcelable
     private List<Item> items;
 
     // CONSTRUCTOR ---------------------------------------------------------------------------------
-    public Area()
+    Area()
     {
         this.town = false;
         this.items = new ArrayList<Item>();

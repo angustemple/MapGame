@@ -14,10 +14,10 @@
     <string name="label_options">Options</string>
     <string name="label_wilderness">Wilderness</string>
     <string name="label_town">Town</string>
-    <string name="move_north">Moved 1 unit north...</string>
-    <string name="move_south">Moved 1 unit south...</string>
-    <string name="move_east">Moved 1 unit east...</string>
-    <string name="move_west">Moved 1 unit west...</string>
+    <string name="move_north">Moved 1 unit north&#8230;</string>
+    <string name="move_south">Moved 1 unit south&#8230;</string>
+    <string name="move_east">Moved 1 unit east&#8230;</string>
+    <string name="move_west">Moved 1 unit west&#8230;</string>
     <string name="cannot_move">Cannot move any further in this direction</string>
 
     <!--Strings for WildernessOptionsActivity-->
@@ -37,5 +37,11 @@
     <string name="label_drop_item">Drop Item</string>
     <string name="label_return">Return</string>
     <string name="label_blank"> </string>
+
+    <!--Strings for MarketOptionsActivity-->
+    <string name="label_buy_item">Buy Item</string>
+    <string name="label_sell_item">Sell Item</string>
+    <string name="cannot_buy">Cannot purchase item!</string>
+
 
 </resources>

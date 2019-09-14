@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Controller.WildernessOptionActivity">
+    tools:context=".Controller.MarketOptionActivity">
+
 
     <Button
         android:id="@+id/btn_area_item_next"
@@ -64,13 +65,13 @@
         app:layout_constraintTop_toTopOf="@+id/linearLayout2" />
 
     <Button
-        android:id="@+id/btn_buy_item"
+        android:id="@+id/btn_take_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="28dp"
         android:gravity="center_horizontal|center_vertical"
-        android:text="@string/label_take_item"
+        android:text="@string/label_buy_item"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/layout_area_items"
         app:layout_constraintHorizontal_bias="0.492"
@@ -78,13 +79,13 @@
         app:layout_constraintTop_toBottomOf="@+id/layout_area_items" />
 
     <Button
-        android:id="@+id/btnn_sell_item"
+        android:id="@+id/btn_sell_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="80dp"
         android:gravity="center_horizontal|center_vertical"
-        android:text="@string/label_drop_item"
+        android:text="@string/label_sell_item"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/btn_return"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
@@ -262,5 +263,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintGuide_percent="0.5"
         app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

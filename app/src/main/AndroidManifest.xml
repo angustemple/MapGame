@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Controller.WildernessOptionActivity"></activity>
+        <activity android:name=".Controller.MarketOptionActivity"></activity>
+        <activity android:name=".Controller.WildernessOptionActivity" />
         <activity android:name=".Controller.NavigationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
