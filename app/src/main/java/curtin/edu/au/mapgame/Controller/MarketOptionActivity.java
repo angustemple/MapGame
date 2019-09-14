@@ -207,8 +207,15 @@ public class MarketOptionActivity extends AppCompatActivity {
         {
             label_area_items.setText(getString(R.string.label_area_items, area_index + 1, currentArea.getItemSize()));
             Item curr_area_item = currentArea.viewItem(area_index);
+            if(curr_area_item instanceof Food)
+            {
+                area_item_mass_health.setText(getString(R.string.label_health, curr_area_item.getHealthMass()));
+            }
+            else if(curr_area_item instanceof Equipment)
+            {
+                area_item_mass_health.setText(getString(R.string.label_mass, curr_area_item.getHealthMass()));
+            }
             area_item_description.setText(curr_area_item.getDescription());
-            area_item_mass_health.setText(getString(R.string.label_mass, curr_area_item.getHealthMass()));
             area_value.setText(getString(R.string.label_value, curr_area_item.getValue()));
         }
         else
